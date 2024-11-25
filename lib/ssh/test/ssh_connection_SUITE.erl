@@ -975,7 +975,7 @@ do_adjusted_send(Config, NPkts, IsAdjustOk) ->
 			  ct:log("~p:~p open channel",[?MODULE,?LINE]),
 			  {ok, ChannelId} = ssh_connection:session_channel(ConnectionRef, WinSize, PktSize, infinity),
 			  ct:log("~p:~p set window handling mode ~p", [?MODULE,?LINE, WHM]),
-                          ssh_connection_handler:set_window_handling_mode(ConnectionRef, ChannelId, WHM),
+                          ssh_connection:set_window_handling_mode(ConnectionRef, ChannelId, WHM),
 			  ct:log("~p:~p start subsystem", [?MODULE,?LINE]),
 			  case ssh_connection:subsystem(ConnectionRef, ChannelId, "echo_n", infinity) of
 			      success ->

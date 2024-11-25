@@ -398,8 +398,6 @@ init([Options]) ->
     process_flag(trap_exit, true),
     try Cb:init(channel_cb_init_args(Options)) of
 	{ok, ChannelState} ->
-            %% This callback may not exist, thus extra catch
-	    catch Cb:check_window_handling_mode(Cb, ChannelState, ConnectionManager),
 	    State = #state{cm = ConnectionManager, 
 			   channel_cb = Cb,
 			   channel_id = ChannelId,
@@ -407,8 +405,6 @@ init([Options]) ->
 	    self() ! {ssh_channel_up, ChannelId, ConnectionManager}, 
 	    {ok, State};
 	{ok, ChannelState, Timeout} ->
-            %% This callback may not exist, thus extra catch
-	    catch Cb:check_window_handling_mode(Cb, ChannelState, ConnectionManager),
 	    State = #state{cm = ConnectionManager, 
 			   channel_cb = Cb,
 			   channel_id = ChannelId,
