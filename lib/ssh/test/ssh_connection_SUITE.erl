@@ -236,7 +236,6 @@ end_per_group(_, Config) ->
 
 %%--------------------------------------------------------------------
 init_per_testcase(TestCase, Config) ->
-    io:format(user, "Testcase ~p~n", [TestCase]),
     PktSize = 1024, % 1KiB
     NewConfig = case TestCase of
         manual_window_handling ->
